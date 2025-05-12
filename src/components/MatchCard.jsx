@@ -86,7 +86,9 @@ function MatchCard({ match }) {
 
   const handleBetClick = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/log`, {
+      const apiBase = import.meta.env.VITE_API_BASE || "http://localhost:5051";
+      console.log("📡 API BASE:", apiBase);
+      const res = await fetch(`${apiBase}/api/log`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
