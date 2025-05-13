@@ -88,8 +88,10 @@ function MatchCard({ match }) {
     try {
       const apiBase = import.meta.env.VITE_API_BASE || "http://localhost:5051";
       console.log("📡 API BASE:", apiBase);
+      console.log("Logging bet to:", `${apiBase}/api/log`);
       const res = await fetch(`${apiBase}/api/log`, {
         method: "POST",
+        mode: "cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "bet_click",
@@ -103,7 +105,7 @@ function MatchCard({ match }) {
       });
       const result = await res.json();
       if (!res.ok) {
-        console.error("❌ Server error logging bet:", res.statusText);
+        console.error("❌ Server error logging bet:", res.statusText, result);
       }
     } catch (err) {
       console.error("❌ Failed to log bet click", err);
